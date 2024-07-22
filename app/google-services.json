@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "869293921814",
+    "project_id": "app-elaunda",
+    "storage_bucket": "app-elaunda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869293921814:android:78ef963cd9c86cb9bf8737",
+        "android_client_info": {
+          "package_name": "com.example.appelaunda"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmhU4LYUpQJ9wv7pWFEsfH7hqb9GhcrAc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

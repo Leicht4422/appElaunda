@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">App ELAUNDA</string>
+    <string name="first_slide">Freshness</string>
+    <string name="second_slide">Timely</string>
+    <string name="third_slide">Economic</string>
+
+    <string name="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
