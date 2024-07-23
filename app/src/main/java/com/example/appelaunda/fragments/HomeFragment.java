@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,9 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.appelaunda.R;
 import com.example.appelaunda.adapters.CategoryAdapter;
+import com.example.appelaunda.adapters.NewProductAdapter;
 import com.example.appelaunda.models.CategoryModel;
+import com.example.appelaunda.models.NewProductsModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,9 +35,12 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView catRecyclerView;
+    RecyclerView catRecyclerView,newProductRecyclerview;
     CategoryAdapter categoryAdapter;
     List<CategoryModel> categoryModelList;
+// New product Recyclerview
+    NewProductAdapter newProductAdapter;
+    List<NewProductsModel>newProductsModelList;
 
     private StorageReference storageRef;
 
@@ -42,6 +48,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        newProductRecyclerview = root.findViewById(R.id.new_product_rec);
+        catRecyclerView = root.findViewById(R.id.rec_category);
 
         // Initialize Firebase Storage
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -82,6 +91,7 @@ public class HomeFragment extends Fragment {
                             categoryModelList.add(category);
                         }
                         categoryAdapter.notifyDataSetChanged(); // Update the adapter
+                        Toast.makeText(getActivity(),text""+ task.getException(), Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -90,6 +100,36 @@ public class HomeFragment extends Fragment {
                         Log.w("HomeFragment", "Error getting categories.", e);
                     }
                 });
+        newProductRecyclerview.setlayoutManager(new_LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
+        newProductsModelList = new ArrayList<>();
+        newProductsAdapter = NewProductAdapter(getContext(),newProductsModelList);
+        newProductRecyclerview.setAdapter(newProductAdapter);
+
+        private void fetchCategories() {
+            firestore.collection("NewProducts")
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                                NewProductsModel newProductsModel= newProductsModel(
+                                        document.getId(),
+                                        document.getString("name") != null ? document.getString("name") : "",
+                                        document.getLong("priority") != null ? document.getLong("priority").intValue() : 0
+                                );
+                                NewProductsList.add(NewProductsModel);
+                            }
+                            NewProductsAdapter.notifyDataSetChanged(); // Update the adapter
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("HomeFragment", "Error getting NewProducts.", e);
+                        }
+                        Toast.makeText(getActivity(),text""+ task.getException(), Toast.LENGTH_SHORT).show();
+                    });
+
     }
 
     }
