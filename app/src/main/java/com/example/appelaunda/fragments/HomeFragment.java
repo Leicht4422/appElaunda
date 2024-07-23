@@ -1,5 +1,6 @@
 package com.example.appelaunda.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +36,8 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    LinearLayout linearLayout;
+    ProgressDialog progressDialog;
     RecyclerView catRecyclerView, newProductRecyclerview, popularRecyclerView;
     CategoryAdapter categoryAdapter;
     List<CategoryModel> categoryModelList;
@@ -53,6 +56,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        progressDialog = new ProgressDialog(getActivity());
         popularRecyclerView = root.findViewById(R.id.popular_rec);
         newProductRecyclerview = root.findViewById(R.id.new_product_rec);
         catRecyclerView = root.findViewById(R.id.rec_category);
@@ -61,6 +65,8 @@ public class HomeFragment extends Fragment {
         storageRef = storage.getReference();
         firestore = FirebaseFirestore.getInstance();
 
+        linearLayout = root.findViewById(R.id.home_layout);
+        linearLayout.setVisibility(View.GONE);
         ImageSlider imageSlider = root.findViewById(R.id.image_slider);
         List<SlideModel> slideModels = new ArrayList<>();
         slideModels.add(new SlideModel(R.drawable.banner1, "Discounts!!", ScaleTypes.CENTER_CROP));
@@ -68,10 +74,18 @@ public class HomeFragment extends Fragment {
         slideModels.add(new SlideModel(R.drawable.banner3, "50% Off Discounts!!", ScaleTypes.CENTER_CROP));
         imageSlider.setImageList(slideModels);
 
+        progressDialog.setTitle("Welcome To Our Laundry");
+        progressDialog.setMessage("please wait..");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+
         catRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         categoryModelList = new ArrayList<>();
         categoryAdapter = new CategoryAdapter(getActivity(), categoryModelList);
         catRecyclerView.setAdapter(categoryAdapter);
+        linearLayout.setVisibility(View.VISIBLE);
+        progressDialog.dismiss();
 
         fetchCategories();
 
