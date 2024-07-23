@@ -12,7 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="95dp"
         android:layout_height="41dp"
-        android:text="sign_in"
+        android:text="Sign In"
         android:textColor="@color/blue"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -68,10 +68,10 @@
         tools:layout_editor_absoluteY="479dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="177dp"
+        android:layout_height="26dp"
         android:layout_marginTop="16dp"
-        android:text="Dont Have an account"
+        android:text="Don't Have an account?"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.376"
