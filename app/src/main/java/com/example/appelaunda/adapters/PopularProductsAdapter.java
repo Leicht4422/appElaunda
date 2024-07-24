@@ -1,6 +1,9 @@
 package com.example.appelaunda.adapters;
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,43 +16,43 @@ import com.example.appelaunda.models.PopularProductsModel;
 
 import java.util.List;
 
-public class popularProductsAdapter extends RecyclerView.Adapter<PopularProductsAdapter.ViewHolder> {
+public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProductsAdapter.ViewHolder> {
 
     private Context context;
-    private List<PopularProductsModel>popularProductsModelList;
+    private List<PopularProductsModel> popularProductsModelList;
 
-    public popularProductsAdapter(Context context, List<PopularProductsModel> popularProductsModelList) {
+    public PopularProductsAdapter(Context context, List<PopularProductsModel> popularProductsModelList) {
         this.context = context;
         this.popularProductsModelList = popularProductsModelList;
     }
 
-
-
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
-   return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.popular_items,parent,false));
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.popular_items, parent, false));
     }
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Glide.with(context).load(popularProductsModelList.get(position).getImg_url()).into(holder.imageView);
         holder.name.setText(popularProductsModelList.get(position).getName());
-        holder.name.setText(String.valueof(popularProductsModelList.get(position).getPrice()));
+        holder.price.setText(String.valueOf(popularProductsModelList.get(position).getPrice())); // Corrected method call
     }
-    @Override
-    public int getItemCount(){
-     return popularProductsModelList.size();
-    }
-    public class ViewHolder extends RecyclerView.ViewHolder{
 
-    ImageView imageView;
-    TextView name, price;
-    public ViewHolder(@NonNull View itemView) {
+    @Override
+    public int getItemCount() {
+        return popularProductsModelList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        TextView name, price;
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.all_img);
-        name = itemView.findViewById(R.id.all_product_name);
-        price = itemView.findViewById(R.id.all_price);
-
+            name = itemView.findViewById(R.id.all_product_name);
+            price = itemView.findViewById(R.id.all_price);
         }
     }
 }
