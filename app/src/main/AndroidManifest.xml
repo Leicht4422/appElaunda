@@ -15,11 +15,14 @@
         android:theme="@style/Theme.AppELAUNDA"
         tools:targetApi="31">
         <activity
+            android:name=".activites.ShowAllActivity"
+            android:exported="false" />
+        <activity
             android:name=".activites.DetailedActivity"
             android:exported="false" />
         <activity
             android:name=".activites.BoardingActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activites.RegistrationActivity"
             android:exported="true">
@@ -34,7 +37,7 @@
             android:exported="false" />
         <activity
             android:name=".activites.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

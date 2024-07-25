@@ -16,6 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 import com.example.appelaunda.R;
 import com.example.appelaunda.models.NewProductsModel;
+import com.example.appelaunda.models.PopularProductsModel;
+import com.example.appelaunda.models.ShowAllModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DetailedActivity extends AppCompatActivity {
@@ -27,6 +29,8 @@ public class DetailedActivity extends AppCompatActivity {
     Button addToCart,buyNow;
     ImageView addItems,removeItems;
     NewProductsModel newProductsModel= null;
+    PopularProductsModel popularProductsModel = null;
+    ShowAllModel showAllModel = null;
     private FirebaseFirestore firestore;
 
     @Override
@@ -47,6 +51,10 @@ public class DetailedActivity extends AppCompatActivity {
 
         if(obj instanceof NewProductsModel){
             newProductsModel = (NewProductsModel) obj;
+        }else if(obj instanceof PopularProductsModel){
+            popularProductsModel = (PopularProductsModel) obj;
+        }else if(obj instanceof ShowAllModel){
+            showAllModel = (ShowAllModel) obj;
         }
 
         detailedImg = findViewById(R.id.detailed_img);
@@ -72,6 +80,38 @@ public class DetailedActivity extends AppCompatActivity {
                 // Handle cases where the rating string is not a valid number
                 rating.setRating(0f); // Set a default value, or handle it differently as needed
                 Log.w("ProductRating", "Invalid rating format: " + newProductsModel.getRating());
+            }
+
+        }
+
+        if(popularProductsModel != null){
+            Glide.with(getApplicationContext()).load(popularProductsModel.getImg_url()).into(detailedImg);
+            name.setText(popularProductsModel.getName());
+            price.setText(popularProductsModel.getPrice());
+            description.setText(popularProductsModel.getDescription());
+            try {
+                float ratingValue = Float.parseFloat(popularProductsModel.getRating());
+                rating.setRating(ratingValue);
+            } catch (NumberFormatException e) {
+                // Handle cases where the rating string is not a valid number
+                rating.setRating(0f); // Set a default value, or handle it differently as needed
+                Log.w("ProductRating", "Invalid rating format: " + popularProductsModel.getRating());
+            }
+
+        }
+
+        if(showAllModel != null){
+            Glide.with(getApplicationContext()).load(showAllModel.getImg_url()).into(detailedImg);
+            name.setText(showAllModel.getName());
+            price.setText(showAllModel.getPrice());
+            description.setText(showAllModel.getDescription());
+            try {
+                float ratingValue = Float.parseFloat(showAllModel.getRating());
+                rating.setRating(ratingValue);
+            } catch (NumberFormatException e) {
+                // Handle cases where the rating string is not a valid number
+                rating.setRating(0f); // Set a default value, or handle it differently as needed
+                Log.w("ProductRating", "Invalid rating format: " + showAllModel.getRating());
             }
 
         }

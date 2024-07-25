@@ -1,12 +1,14 @@
 package com.example.appelaunda.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.appelaunda.R;
+import com.example.appelaunda.activites.ShowAllActivity;
 import com.example.appelaunda.adapters.CategoryAdapter;
 import com.example.appelaunda.adapters.NewProductAdapter;
 import com.example.appelaunda.adapters.PopularProductsAdapter;
@@ -42,6 +45,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    TextView catShowAll, newProductShowAll, popularShowAll;
     LinearLayout linearLayout;
     ProgressDialog progressDialog;
     RecyclerView catRecyclerView, newProductRecyclerview, popularRecyclerView;
@@ -66,6 +70,34 @@ public class HomeFragment extends Fragment {
         popularRecyclerView = root.findViewById(R.id.popular_rec);
         newProductRecyclerview = root.findViewById(R.id.new_product_rec);
         catRecyclerView = root.findViewById(R.id.rec_category);
+
+        catShowAll = root.findViewById(R.id.category_see_all);
+        newProductShowAll = root.findViewById(R.id.newProducts_see_all);
+        popularShowAll = root.findViewById(R.id.popular_see_all);
+
+        catShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        newProductShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        popularShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

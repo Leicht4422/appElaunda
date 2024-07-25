@@ -1,6 +1,7 @@
 package com.example.appelaunda.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.appelaunda.R;
+import com.example.appelaunda.activites.DetailedActivity;
 import com.example.appelaunda.models.PopularProductsModel;
 
 import java.util.List;
@@ -37,6 +39,20 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
         Glide.with(context).load(popularProductsModelList.get(position).getImg_url()).into(holder.imageView);
         holder.name.setText(popularProductsModelList.get(position).getName());
         holder.price.setText(String.valueOf(popularProductsModelList.get(position).getPrice())); // Corrected method call
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int currentPosition = holder.getAdapterPosition(); // Get the current position
+                if (currentPosition != RecyclerView.NO_POSITION) { // Check for valid position
+                    Intent intent = new Intent(context, DetailedActivity.class);
+                    // Assuming you add an 'id' field to your NewProductsModel (see below)
+                    intent.putExtra("detailed", popularProductsModelList.get(currentPosition));
+                    context.startActivity(intent);
+                }
+            }
+        });
+
     }
 
     @Override
