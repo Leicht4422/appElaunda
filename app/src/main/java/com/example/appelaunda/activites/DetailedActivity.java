@@ -2,6 +2,7 @@ package com.example.appelaunda.activites;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -40,7 +42,7 @@ public class DetailedActivity extends AppCompatActivity {
 
     RatingBar rating;
     TextView  name,price,description,quantity;
-    Toolbar toolbar;
+    private androidx.appcompat.widget.Toolbar mToolBar;
     int totalQuantity = 1;
     int totalPrice =0;
     Button addToCart,buyNow;
@@ -50,6 +52,7 @@ public class DetailedActivity extends AppCompatActivity {
     ShowAllModel showAllModel = null;
     private FirebaseFirestore firestore;
     FirebaseAuth auth;
+    private int productId;
 
 
 
@@ -67,6 +70,22 @@ public class DetailedActivity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+
+        mToolBar = findViewById(R.id.detailed_toolbar);
+        setSupportActionBar(mToolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Get the product ID from the intent
+        productId = getIntent().getIntExtra("productId", -1);
+        if (productId == -1) {
+            Log.e("DetailedActivity", "Invalid product ID received");
+            finish(); // Close the activity if no valid ID is found
+            return;
+        }
+
+        // Fetch product details based on the ID
+        fetchProductDetails(productId);
+
 
         final Object obj = getIntent().getSerializableExtra("detailed");
 
@@ -144,7 +163,20 @@ public class DetailedActivity extends AppCompatActivity {
         buyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DetailedActivity.this,AddressActivity.class));
+                Intent intent = new Intent(DetailedActivity.this,AddressActivity.class);
+                if (newProductsModel != null){
+                    intent.putExtra("item",newProductsModel);
+                }
+                if (showAllModel != null){
+                    intent.putExtra("item", (Parcelable) showAllModel);
+                }
+                if (popularProductsModel != null){
+                    intent.putExtra("item",popularProductsModel);
+                }
+
+
+                startActivity(intent);
+
             }
         });
 
@@ -189,6 +221,48 @@ public class DetailedActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void fetchProductDetails(int productId) {
+        // Assuming you have a "Products" collection in Firestore
+        firestore.collection("Products").document(String.valueOf(productId))
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                // Extract product details from the document
+                                String name = document.getString("name");
+                                String description = document.getString("description");
+                                int price = document.getLong("price").intValue(); // Assuming price is stored as a number
+                                String imageUrl = document.getString("img_url");
+                                String rating = document.getString("rating");
+
+                                // Update your UI elements with the fetched data
+                                Glide.with(getApplicationContext()).load(imageUrl).into(detailedImg);
+                                DetailedActivity.this.name.setText(name);
+                                DetailedActivity.this.price.setText(String.format("$%.2f", price));
+                                DetailedActivity.this.description.setText(description);
+                                try {
+                                    float ratingValue = Float.parseFloat(rating);
+                                    DetailedActivity.this.rating.setRating(ratingValue);
+                                } catch (NumberFormatException e) {
+                                    // Handle cases where the rating string is not a valid number
+                                    DetailedActivity.this.rating.setRating(0f);
+                                    Log.w("ProductRating", "Invalid rating format: " + rating);
+                                }
+                                totalPrice = price * totalQuantity;
+                            } else {
+                                Log.d("DetailedActivity", "No such document");
+                            }
+                        } else {
+                            Log.d("DetailedActivity", "get failed with ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void setSupportActionBar(Toolbar mToolBar) {
     }
 
     private void addToCart() {

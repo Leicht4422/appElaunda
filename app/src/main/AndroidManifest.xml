@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AppELAUNDA"
         tools:targetApi="31">
         <activity
+            android:name=".activites.PaymentActivity"
+            android:exported="false" />
+        <activity
             android:name=".activites.AddAddressActivity"
             android:exported="false" />
         <activity

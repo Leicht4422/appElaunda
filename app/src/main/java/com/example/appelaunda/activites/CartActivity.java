@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -34,7 +34,7 @@ import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
+    androidx.appcompat.widget.Toolbar toolbar;
     int overAllTotalAmount;
     RecyclerView recyclerView;
     List<MyCartModel> cartModelList;
@@ -99,6 +99,5 @@ public class CartActivity extends AppCompatActivity {
 
     };
 
-    private void setSupportActionBar(Toolbar toolbar) {
-    }
+
 }

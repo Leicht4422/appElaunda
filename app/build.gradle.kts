@@ -29,6 +29,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation(libs.appcompat)
@@ -45,6 +46,7 @@ dependencies {
     //slider
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation (libs.glide)
+
 
 
 }

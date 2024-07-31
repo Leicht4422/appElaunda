@@ -36,18 +36,24 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(context).load(popularProductsModelList.get(position).getImg_url()).into(holder.imageView);
+        String imageUrl = popularProductsModelList.get(position).getImg_url();
+        if (imageUrl != null) {
+            Glide.with(context).load(imageUrl).into(holder.imageView);
+        } else {
+            // Handle null image URL, e.g., show a placeholder
+            holder.imageView.setImageResource(R.drawable.milk);
+        }
+
         holder.name.setText(popularProductsModelList.get(position).getName());
-        holder.price.setText(String.valueOf(popularProductsModelList.get(position).getPrice())); // Corrected method call
+        holder.price.setText(String.format("$%.2f", popularProductsModelList.get(position).getPrice()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int currentPosition = holder.getAdapterPosition(); // Get the current position
-                if (currentPosition != RecyclerView.NO_POSITION) { // Check for valid position
+                int currentPosition = holder.getAdapterPosition();
+                if (currentPosition != RecyclerView.NO_POSITION) {
                     Intent intent = new Intent(context, DetailedActivity.class);
-                    // Assuming you add an 'id' field to your NewProductsModel (see below)
-                    intent.putExtra("detailed", popularProductsModelList.get(currentPosition));
+                    intent.putExtra("productId", popularProductsModelList.get(currentPosition).getId()); // Pass the ID
                     context.startActivity(intent);
                 }
             }

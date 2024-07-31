@@ -8,6 +8,7 @@ public class PopularProductsModel implements Serializable {
     String rating;
     int price;
     String img_url;
+    private int id;
 
     public PopularProductsModel() {
     }
@@ -18,10 +19,18 @@ public class PopularProductsModel implements Serializable {
         this.rating = rating;
         this.price = price;
         this.img_url = img_url;
+        this.id = id;
+
     }
 
     public String getDescription() {
         return description;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setDescription(String description) {
