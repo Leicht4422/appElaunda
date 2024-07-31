@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Current Date: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Current Date: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Current Time: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Current Time: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Product Name: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Current Date: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -105,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Product Price: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Current Date: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -132,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Total Price "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -142,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Total price "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -159,7 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Total Quantity "
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -169,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans-serif"
+                android:fontFamily="sans-serif"
                 android:text="Total Quantity"
                 android:textSize="16sp"
                 android:textStyle="bold" />

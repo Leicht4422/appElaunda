@@ -46,7 +46,7 @@ public class ShowAllActivity extends AppCompatActivity {
 
         toolbar= findViewById(R.id.show_all_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowCustomEnabled("true");
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
 
         String type = getIntent().getStringExtra("type");
 

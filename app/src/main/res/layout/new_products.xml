@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/blue"
-            android:fontFamily="@font/amethyst"
+            android:fontFamily="casual"
             android:text="New"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -37,14 +37,14 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/new_img"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/new_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:fontFamily="@font/amethyst"
+            android:fontFamily="sans-serif"
             android:text="Product Name"
             android:textSize="17sp"
             android:textStyle="bold"
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:fontFamily="@font/amethyst"
+            android:fontFamily="sans-serif"
             android:text="499"
             android:textSize="18sp"
             android:textStyle="bold"

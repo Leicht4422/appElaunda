@@ -79,10 +79,10 @@ public class LoginActivity extends AppCompatActivity {
 
             });
 
-        //startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        startActivity(new Intent(LoginActivity.this,MainActivity.class));
     }
 
-public void singup(View view) {
+public void signup(View view) {
     startActivity(new Intent(LoginActivity.this,RegistrationActivity.class));
 }
 }

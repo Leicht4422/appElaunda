@@ -44,7 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
 
-        sharedPreferences = getSharedPreferences("onBoardingScreen",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("BoardingScreen",MODE_PRIVATE);
 
         boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime",true);
 
@@ -53,7 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
             editor.putBoolean("FirstTime",false);
             editor.commit();
 
-            Intent intent = new Intent(RegistrationActivity.this,BoardingActivity.class);
+            Intent intent = new Intent(RegistrationActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
 
@@ -108,11 +108,11 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
 
-        //startActivity(new Intent(RegistrationActivity.this,MainActivity.class));
+        startActivity(new Intent(RegistrationActivity.this,MainActivity.class));
 
     }
 
-    public void singin(View view){
+    public void signin(View view){
         startActivity(new Intent(RegistrationActivity.this,LoginActivity.class));
     }
 }

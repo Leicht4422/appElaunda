@@ -3,6 +3,7 @@ package com.example.appelaunda.activites;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -21,6 +22,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.appelaunda.R;
 import com.example.appelaunda.adapters.SlideAdapter;
 
+import java.util.Objects;
+
 public class BoardingActivity extends AppCompatActivity {
 
 
@@ -38,31 +41,37 @@ public class BoardingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_boarding);
+
+        setContentView(R.layout.activity_boarding); // Set content view first
+
+        // Now you can safely hide the ActionBar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-
         });
-
-        getSupportActionBar().hide();
 
         viewPager = findViewById(R.id.slider);
         dotsLayout = findViewById(R.id.dots);
         btn = findViewById(R.id.get_started_btn);
 
         addDots(0);
-
         viewPager.addOnPageChangeListener(changeListener);
 
-        //Call Adapter
         sliderAdapter = new SlideAdapter(this);
         viewPager.setAdapter(sliderAdapter);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(BoardingActivity.this, RegistrationActivity.class));
+            public void onClick(View v) {
+                Log.d("BoardingActivity", "Get Started button clicked");
+                Intent intent = new Intent(BoardingActivity.this, RegistrationActivity.class);
+                startActivity(intent);
+                Log.d("BoardingActivity", "Started RegistrationActivity");
                 finish();
             }
         });
@@ -102,10 +111,9 @@ public class BoardingActivity extends AppCompatActivity {
                 btn.setVisibility(View.INVISIBLE);
             } else if (position == 1) {
                 btn.setVisibility(View.INVISIBLE);
-
             }else {
-                animation = AnimationUtils.loadAnimation(BoardingActivity.this, R.anim.slide_animation);
                 btn.setAnimation(animation);
+                animation = AnimationUtils.loadAnimation(BoardingActivity.this, R.anim.slide_animation);
                 btn.setVisibility(View.VISIBLE);
             }
 

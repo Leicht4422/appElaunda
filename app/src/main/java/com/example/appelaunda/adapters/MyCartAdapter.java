@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +24,7 @@ import java.util.List;
 public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder> {
     Context context;
     List<MyCartModel> list;
+    int totalAmount;
 
     public MyCartAdapter(Context context, List<MyCartModel> list){
       this.context = context;
@@ -41,8 +43,15 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
         holder.time.setText(list.get(position).getCurrentTime());
         holder.price.setText(list.get(position).getProductPrice()+"$");
         holder.name.setText(list.get(position).getProductName());
-        holder.totalPrice.setText(String.valueOflist(list.get(position).getTotalPrice()));
+        holder.totalPrice.setText(list.get(position).getTotalPrice());
         holder.totalQuantity.setText(list.get(position).getTotalQuantity());
+
+        totalAmount = totalAmount + list.get(position).getTotalPrice();
+        Intent intent = new Intent("MyTotalAmount");
+        intent.putExtra("totalAmount", totalAmount);
+        context.sendBroadcast(intent);
+
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
 

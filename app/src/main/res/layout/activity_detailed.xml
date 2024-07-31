@@ -130,7 +130,7 @@
                     android:src="@drawable/plusicon" />
 
                 <TextView
-                    android:id="@+id/detailed_count"
+                    android:id="@+id/quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
