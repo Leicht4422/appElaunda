@@ -36,11 +36,11 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        NewProductsModel model = list.get(position); // Get the model for this position
 
-        Glide.with(context).load(model.getImg_url()).into(holder.newImg);
-        holder.newName.setText(model.getName());
-        holder.newPrice.setText(String.valueOf(model.getPrice()));
+
+        Glide.with(context).load(list.get(position).getImg_url()).into(holder.newImg);
+        holder.newName.setText(list.get(position).getName());
+        holder.newPrice.setText(String.valueOf(list.get(position).getPrice()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +49,7 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
                 if (currentPosition != RecyclerView.NO_POSITION) { // Check for valid position
                     Intent intent = new Intent(context, DetailedActivity.class);
                     // Assuming you add an 'id' field to your NewProductsModel (see below)
-                    intent.putExtra("detailed", list.get(currentPosition).getId());
+                    intent.putExtra("productID", list.get(currentPosition).getId());
                     context.startActivity(intent);
                 }
             }

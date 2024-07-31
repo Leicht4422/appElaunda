@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.appelaunda.R;
+import com.example.appelaunda.activites.DetailedActivity;
 import com.example.appelaunda.activites.ShowAllActivity;
 import com.example.appelaunda.models.CategoryModel;
 import java.util.List;

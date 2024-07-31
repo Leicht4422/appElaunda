@@ -224,7 +224,7 @@ public class DetailedActivity extends AppCompatActivity {
     }
     private void fetchProductDetails(int productId) {
         // Assuming you have a "Products" collection in Firestore
-        firestore.collection("Products").document(String.valueOf(productId))
+        firestore.collection("AllProducts").document(String.valueOf(productId))
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -241,7 +241,7 @@ public class DetailedActivity extends AppCompatActivity {
                                 // Update your UI elements with the fetched data
                                 Glide.with(getApplicationContext()).load(imageUrl).into(detailedImg);
                                 DetailedActivity.this.name.setText(name);
-                                DetailedActivity.this.price.setText(String.format("$%.2f", price));
+                                DetailedActivity.this.price.setText(String.format("$%d", price));
                                 DetailedActivity.this.description.setText(description);
                                 try {
                                     float ratingValue = Float.parseFloat(rating);
@@ -262,8 +262,6 @@ public class DetailedActivity extends AppCompatActivity {
                 });
     }
 
-    private void setSupportActionBar(Toolbar mToolBar) {
-    }
 
     private void addToCart() {
         String saveCurrentTime,saveCurrentDate;

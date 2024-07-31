@@ -123,15 +123,7 @@ public class HomeFragment extends Fragment {
         catRecyclerView.setAdapter(categoryAdapter);
 
 
-
-        newProductRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
-        newProductsModelList = new ArrayList<>();
-        newProductAdapter = new NewProductAdapter(getContext(), newProductsModelList);
-        newProductRecyclerview.setAdapter(newProductAdapter);
-
-
-
-        popularRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        popularRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL, false));
         popularProductsModelList = new ArrayList<>();
         popularProductAdapter = new PopularProductsAdapter(getContext(), popularProductsModelList);
         popularRecyclerView.setAdapter(popularProductAdapter);
@@ -158,7 +150,12 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-        db.collection("New Products")
+        newProductRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        newProductsModelList = new ArrayList<>();
+        newProductAdapter = new NewProductAdapter(getContext(),newProductsModelList);
+        newProductRecyclerview.setAdapter(newProductAdapter);
+
+        db.collection("NewProducts")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -177,7 +174,7 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
-        db.collection("All Products")
+        db.collection("AllProducts")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

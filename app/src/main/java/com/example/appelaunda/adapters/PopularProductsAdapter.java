@@ -20,8 +20,8 @@ import java.util.List;
 
 public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProductsAdapter.ViewHolder> {
 
-    private Context context;
-    private List<PopularProductsModel> popularProductsModelList;
+    private final Context context;
+    private final List<PopularProductsModel> popularProductsModelList;
 
     public PopularProductsAdapter(Context context, List<PopularProductsModel> popularProductsModelList) {
         this.context = context;
@@ -36,16 +36,10 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String imageUrl = popularProductsModelList.get(position).getImg_url();
-        if (imageUrl != null) {
-            Glide.with(context).load(imageUrl).into(holder.imageView);
-        } else {
-            // Handle null image URL, e.g., show a placeholder
-            holder.imageView.setImageResource(R.drawable.milk);
-        }
 
+        Glide.with(context).load(popularProductsModelList.get(position).getImg_url()).into(holder.imageView);
         holder.name.setText(popularProductsModelList.get(position).getName());
-        holder.price.setText(String.format("$%.2f", popularProductsModelList.get(position).getPrice()));
+        holder.price.setText(String.format("$%d", popularProductsModelList.get(position).getPrice()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
